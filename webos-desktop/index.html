@@ -3,10 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yuki OS</title>
+
+    <title>Yuki OS – Browser-Based Gaming Desktop</title>
+
+    <meta
+      name="description"
+      content="Yuki OS is a browser-based gaming desktop that lets you play games instantly online. No downloads, no installs — just play."
+    />
+
+    <meta property="og:title" content="Yuki OS – Browser-Based Gaming Desktop" />
+    <meta
+      property="og:description"
+      content="Play games instantly in your browser with Yuki OS — a web-based gaming desktop with instant access to hundreds of games."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://reeyuki.github.io/static/seo/preview.webp" />
+    <meta property="og:site_name" content="Yuki OS" />
+    <meta property="og:url" content="https://reeyuki.github.io/" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yuki OS – Browser-Based Gaming Desktop" />
+    <meta
+      name="twitter:description"
+      content="Play games instantly online with Yuki OS. A web-based gaming desktop with no downloads and no installs."
+    />
+    <meta name="twitter:image" content="https://reeyuki.github.io/static/seo/preview.webp" />
+
+    <meta name="application-name" content="Yuki OS" />
+
+    <link rel="canonical" href="https://reeyuki.github.io/" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Yuki OS",
+        "url": "https://reeyuki.github.io/",
+        "description": "Browser-based gaming desktop for instant online play.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Yuki OS"
+        }
+      }
+    </script>
+
     <link href="/src/style.css" rel="stylesheet" />
     <script type="module" src="/src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle@0.2.0-nightly.2026.1.17/ruffle.min.js"></script>
+
     <style>
       body {
         background-color: #1e1e1ed9;
@@ -15,6 +60,14 @@
   </head>
 
   <body>
+    <main style="position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden">
+      <h1>Yuki OS</h1>
+      <p>
+        Yuki OS is a browser-based gaming desktop that lets you play games instantly online without downloads or
+        installs.
+      </p>
+    </main>
+
     <div id="selection-box"></div>
 
     <div id="desktop">
@@ -42,7 +95,7 @@
         <img src="/static/icons/paint.webp" />
         <div>Paint</div>
       </div>
-      
+
       <div class="icon selectable" data-app="browser">
         <img src="/static/icons/chromium.webp" />
         <div>Browser</div>
@@ -524,50 +577,49 @@
       </div>
     </div>
 
-   <div id="taskbar">
-    <div id="start-button"></div>
-    <div id="taskbar-windows" style="display: flex"></div>
-    <div id="system-tray">
-      <div id="clock">12:00 PM</div>
-      <div id="date">01/01/2026</div>
-      <script>
-        if (window.assets) {
-          const statusEl = document.createElement("div");
-          statusEl.id = "asset-status";
-          statusEl.textContent = "Syncing assets...";
-          const progressEl = document.createElement("progress");
-          progressEl.id = "asset-progress";
-          progressEl.max = 100;
-          progressEl.value = 0;
-          const tray = document.getElementById("system-tray");
-          tray.insertBefore(statusEl, tray.firstChild);
-          tray.insertBefore(progressEl, tray.firstChild.nextSibling);
+    <div id="taskbar">
+      <div id="start-button"></div>
+      <div id="taskbar-windows" style="display: flex"></div>
+      <div id="system-tray">
+        <div id="clock">12:00 PM</div>
+        <div id="date">01/01/2026</div>
+        <script>
+          if (window.assets) {
+            const statusEl = document.createElement("div");
+            statusEl.id = "asset-status";
+            statusEl.textContent = "Syncing assets...";
+            const progressEl = document.createElement("progress");
+            progressEl.id = "asset-progress";
+            progressEl.max = 100;
+            progressEl.value = 0;
+            const tray = document.getElementById("system-tray");
+            tray.insertBefore(statusEl, tray.firstChild);
+            tray.insertBefore(progressEl, tray.firstChild.nextSibling);
 
-          window.assets.onProgress((data) => {
-            if (data.done) {
-              statusEl.textContent = "Assets up to date!";
-              progressEl.value = 100;
+            window.assets.onProgress((data) => {
+              if (data.done) {
+                statusEl.textContent = "Assets up to date!";
+                progressEl.value = 100;
 
-              setTimeout(() => {
-                statusEl.style.display = "none";
-                progressEl.style.display = "none";
-              }, 10000);
-              return;
-            }
+                setTimeout(() => {
+                  statusEl.style.display = "none";
+                  progressEl.style.display = "none";
+                }, 10000);
+                return;
+              }
 
-            tray.style.display = "flex";
+              tray.style.display = "flex";
 
-            const fileName = data.file.split("/").pop().split("\\").pop();
-            const shortName = fileName.length > 10 ? fileName.slice(-10) : fileName;
+              const fileName = data.file.split("/").pop().split("\\").pop();
+              const shortName = fileName.length > 10 ? fileName.slice(-10) : fileName;
 
-            statusEl.textContent = `Downloading …/${shortName}`;
-            progressEl.value = data.progress;
-          });
-        }
-      </script>
+              statusEl.textContent = `Downloading …/${shortName}`;
+              progressEl.value = data.progress;
+            });
+          }
+        </script>
+      </div>
     </div>
-  </div>
-
 
     <div id="context-menu"></div>
 
